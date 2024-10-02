@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Define the project -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- Define the model version FOR NOW ALWSYS 4.0.0-->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Define the group ID, artifact ID, version, name, description, and URL of the project. -->
+    <groupId>io.github.fixthis</groupId>
+    <artifactId>ThisIsWrong</artifactId>
+    <version>2.0.0</version>
+    <name>Give A Better Title</name>
+    <description>This is not a good description</description>
+
+    <properties>
+        <!-- Define the JDK version and character encoding -->
+        <maven.compiler.source>22</maven.compiler.source>
+        <maven.compiler.target>22</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+
+    <!--
+    Licenses are important for open-source projects.
+    They define how the project can be used, distributed, modified, and how to give credit to the original author.
+    -->
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <!-- Information about the developers of the project. -->
+    <!-- keep your github repo private-->
+    <developers>
+        <developer>
+            <id>putyourgithubidhere</id>
+            <name>First_name Last_name</name>
+            <email>githubemailhere</email>
+        </developer>
+    </developers>
+
+    <!-- Information about the source code management system (e.g. GitHub). -->
+    <!-- keep your github repo private-->
+    <scm>
+        <url>http://www.github.com/actualrepo</url>
+    </scm>
+
+
+    <build>
+        <!-- Define the plugins used in the build process. -->
+        <plugins>
+            <!-- Define the plugin to sign the files using GPG -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.2.2</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- The key should be the key ID of the GPG key you want to use to sign the files. -->
+                    <keyname>C76273E51D601B197213AA48F31FFE1B9997F41E</keyname>
+                    <gpgArguments>
+<!--                        <argument>&#45;&#45;pinentry-mode</argument>-->
+<!--                        <argument>loopback</argument>-->
+                    </gpgArguments>
+                </configuration>
+            </plugin>
+
+            <!-- Define the plugin to attach the sources to the JAR file. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Define the plugin to attach the Javadocs to the JAR file. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.6.3</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Define the plugin to deploy the artifacts to Maven Central. -->
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.4.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <autoPublish>true</autoPublish>
+                    <deploymentName>SpecialNameOnMavenCentral</deploymentName>
+                    <publishingServerId>central</publishingServerId> <!-- This is the server ID from your settings.xml file -->
+                    <tokenAuth>true</tokenAuth> <!-- Use token authentication (Generated on Maven Central)-->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
