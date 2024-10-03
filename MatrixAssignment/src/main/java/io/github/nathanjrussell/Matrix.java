@@ -4,15 +4,26 @@ package io.github.nathanjrussell;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Matrix implements MatrixInterface {
     private int[][] matrix;
+    private int numCols;
+    private int numRows;
     Matrix(int numRows, int numCols) {
+        this.numCols = numCols;
+        this.numRows = numRows;
         matrix = new int[numRows][numCols];
     }
 
+    Matrix(int[][] matrix) {
+        this(matrix.length, matrix[0].length);
+        for (int i = 0; i < matrix.length; i++) {
+            System.arraycopy(matrix[i], 0, this.matrix[i], 0, matrix[i].length);
+        }
+    }
+
     public int getNumRows() {
-        return matrix.length;
+        return numRows;
     }
     public int getNumCols() {
-        return matrix[0].length;
+        return numCols;
     }
     public void setElement(int row, int col, int value) {
         matrix[row][col] = value;
