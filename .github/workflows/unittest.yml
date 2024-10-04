@@ -16,7 +16,7 @@ jobs:
     steps:
       # Checkout the repository code
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Set up Java (you can specify any required version here, like Java 11 or Java 17)
       - name: Set up JDK 17
@@ -27,7 +27,7 @@ jobs:
 
       # Cache Maven dependencies to speed up build times
       - name: Cache Maven packages
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
