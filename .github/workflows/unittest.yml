@@ -36,12 +36,12 @@ jobs:
 
       # Install Maven dependencies
       - name: Install Maven dependencies
-        run: mvn install -DskipTests
+        run: mvn install -DskipTests -Dgpg.skip=true
         working-directory: MatrixAssignment
 
       # Run Maven tests
       - name: Run Maven tests
-        run: mvn test
+        run: mvn test -Dgpg.skip=true
         working-directory: MatrixAssignment
 
 
