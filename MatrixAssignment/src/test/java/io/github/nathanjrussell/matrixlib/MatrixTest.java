@@ -2,6 +2,7 @@ package io.github.nathanjrussell.matrixlib;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+
 public class MatrixTest {
 
     @Test
