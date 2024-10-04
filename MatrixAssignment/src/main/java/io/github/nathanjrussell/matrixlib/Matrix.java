@@ -39,7 +39,7 @@ public class Matrix implements MatrixInterface {
         if (j < 0 || j >= numCols) {
             throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_COL);
         }
-        return data[i][j];
+        return data[i][i];
     }
 
 
@@ -59,7 +59,7 @@ public class Matrix implements MatrixInterface {
         if (j < 0 || j >= numCols) {
             throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_COL);
         }
-        data[i][j] = value;
+        data[j][j] = value;
     }
     // Static Methods for Operations
     public static Matrix add(Matrix A, Matrix B)  {
@@ -88,39 +88,13 @@ public class Matrix implements MatrixInterface {
         return result;
     }
 
-    public static Matrix multiply(Matrix A, int scalar)  {
-        Matrix result = new Matrix(A.numRows, A.numCols);
-        for (int i = 0; i < A.numRows; i++) {
-            for (int j = 0; j < A.numCols; j++) {
-                result.data[i][j] = A.data[i][j] * scalar;
-            }
-        }
-        return result;
+    public Matrix minor(int row, int col)  {
+        return new Matrix(MatrixInterface.minor(this, row, col).data);
     }
 
-    public static Matrix multiply(Matrix A, Matrix B)  {
-        if (A.numCols != B.numRows ) {
-            throw new MatrixExceptions(MatrixValidationErrorEnum.INCOMPATIBLE_MATRIX_DIMENSIONS_MULTIPLY);
-        }
-        Matrix result = new Matrix(A.numRows, B.numCols);
-        for (int i = 0; i < A.numRows; i++) {
-            for (int j = 0; j < B.numCols; j++) {
-                for (int k = 0; k < A.numCols; k++) {
-                    result.data[i][j] += A.data[i][k] * B.data[k][j];
-                }
-            }
-        }
-        return result;
-    }
 
-    public Matrix transpose()  {
-        Matrix result = new Matrix(numCols, numRows);
-        for (int i = 0; i < numRows; i++) {
-            for (int j = 0; j < numCols; j++) {
-                result.data[j][i] = data[i][j];
-            }
-        }
-        return result;
+    public Matrix transpose()   {
+        return MatrixInterface.transpose(this);
     }
 
     // Instance Methods that utilize Static Methods

@@ -16,4 +16,20 @@ public interface SquareMatrixInterface extends MatrixInterface {
     }
 
 
+    public static int determinant(SquareMatrix A) throws MatrixExceptions {
+        //full code
+        if (A.numRows == 1) {
+            return A.data[0][0];
+        }
+        if (A.numRows == 2) {
+            return A.data[0][0] * A.data[1][1] - A.data[0][1] * A.data[1][0];
+        }
+        int det = 0;
+        int entrySign = 1;
+        for (int i = 0; i < A.numRows; i++) {
+            det += entrySign * A.data[0][i] * A.minor(0, i).determinant();
+            entrySign *= -1;
+        }
+        return det;
+    }
 }

@@ -26,6 +26,7 @@ public class SquareMatrix extends Matrix {
     }
 
     public SquareMatrix multiply(int scalar)  {
+        return multiply(this, scalar);
     }
 
     public SquareMatrix transpose()  {
@@ -33,47 +34,13 @@ public class SquareMatrix extends Matrix {
         return new SquareMatrix(result.data);
     }
 
-    //The body of this method is fine
     public int determinant()  {
-        if (numRows == 1) {
-            return data[0][0];
-        }
-        if (numRows == 2) {
-            return data[0][0] * data[1][1] - data[0][1] * data[1][0];
-        }
-        int det = 0;
-        int entrySign = 1;
-        for (int i = 0; i < numRows; i++) {
-            det += entrySign * data[0][i] * this.minor(0, i).determinant();
-            entrySign *= -1;
-        }
-        return det;
+        return SquareMatrixInterface.determinant(this);
     }
-    //The body of this method is fine
+
+
     public SquareMatrix minor(int row, int col)  {
-        if (row < 0 || row >= numRows) {
-            throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_ROW);
-        }
-        if (col < 0 || col >= numCols) {
-            throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_COL);
-        }
-        int[][] minorData = new int[numRows - 1][numCols - 1];
-        int m = 0;
-        for (int i = 0; i < numRows; i++) {
-            if (i == row) {
-                continue;
-            }
-            int n = 0;
-            for (int j = 0; j < numCols; j++) {
-                if (j == col) {
-                    continue;
-                }
-                minorData[m][n] = data[i][j];
-                n++;
-            }
-            m++;
-        }
-        return new SquareMatrix(minorData);
+        return new SquareMatrix(MatrixInterface.minor(this, row, col).data);
     }
 
     public int getSize() {
