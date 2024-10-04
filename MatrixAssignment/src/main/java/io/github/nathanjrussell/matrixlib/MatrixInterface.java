@@ -10,5 +10,6 @@ public interface MatrixInterface {
     Matrix add(Matrix other) throws MatrixExceptions; //This method will add two matrices
     Matrix subtract(Matrix other) throws MatrixExceptions; //This method will subtract two matrices
     Matrix multiply(Matrix other) throws MatrixExceptions; //This method will multiply two matrices
+    Matrix multiply(int scalar) throws MatrixExceptions; //This method will multiply a matrix by a scalar
     Matrix transpose() throws MatrixExceptions; //This method will return the transpose of the matrix
 }

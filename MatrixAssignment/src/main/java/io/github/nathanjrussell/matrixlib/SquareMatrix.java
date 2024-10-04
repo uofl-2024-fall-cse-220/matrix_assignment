@@ -89,7 +89,7 @@ public class SquareMatrix extends Matrix {
             throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_POWER);
         }
         if (n == 0) {
-            return identity(numRows);
+            return SquareMatrixInterface.identity(numRows);
         }
         Matrix result = this;
         for (int i = 1; i < n; i++) {
@@ -98,12 +98,5 @@ public class SquareMatrix extends Matrix {
         return new SquareMatrix(result.data);
     }
 
-    public static SquareMatrix identity(int size) throws MatrixExceptions {
-       SquareMatrix idMatrix = new SquareMatrix(size);
-       for (int i = 0; i < size; i++) {
-           idMatrix.data[i][i] = 1;
-       }
-       return idMatrix;
-    }
 }
 

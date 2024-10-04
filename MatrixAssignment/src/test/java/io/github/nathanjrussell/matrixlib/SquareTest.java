@@ -242,7 +242,7 @@ public class SquareTest {
     @Test
     public void testSquareMatrixIdentity() throws MatrixExceptions {
         ;
-        SquareMatrix matrix = SquareMatrix.identity(97);
+        SquareMatrix matrix = SquareMatrixInterface.identity(97);
         for (int i = 0; i < 97; i++) {
             for (int j = 0; j < 97; j++) {
                 if (i == j) {
@@ -256,13 +256,13 @@ public class SquareTest {
 
     @Test
     public void testSquareMatrixIdentityWithInvalidSize() {
-        MatrixExceptions exception = assertThrows(MatrixExceptions.class, () -> SquareMatrix.identity(0));
+        MatrixExceptions exception = assertThrows(MatrixExceptions.class, () -> SquareMatrixInterface.identity(0));
         assertEquals(MatrixValidationErrorEnum.INVALID_SQUARE_MATRIX_SIZE.toString(), exception.getMessage());
     }
 
     @Test
     public void testSquareMatrixIdentityWithInvalidSize2() {
-        MatrixExceptions exception = assertThrows(MatrixExceptions.class, () -> SquareMatrix.identity(-4));
+        MatrixExceptions exception = assertThrows(MatrixExceptions.class, () -> SquareMatrixInterface.identity(-4));
         assertEquals(MatrixValidationErrorEnum.INVALID_SQUARE_MATRIX_SIZE.toString(), exception.getMessage());
     }
 
