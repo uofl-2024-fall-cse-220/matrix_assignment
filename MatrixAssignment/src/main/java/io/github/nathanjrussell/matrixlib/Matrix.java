@@ -18,9 +18,14 @@ public class Matrix implements MatrixInterface {
         this.data = new int[numRows][numCols];
     }
 
-    public Matrix(int[][] data) {
+    public Matrix(int[][] data) throws MatrixExceptions {
         this.numRows = data.length;
         this.numCols = data[0].length;
+        for (int i = 1; i < numRows; i++) {
+            if (data[i].length != numCols) {
+                throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_NUM_COLS);
+            }
+        }
         this.data = data;
     }
 
