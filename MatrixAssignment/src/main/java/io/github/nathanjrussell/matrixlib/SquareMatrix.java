@@ -2,7 +2,7 @@ package io.github.nathanjrussell.matrixlib;
 
 public class SquareMatrix extends Matrix {
 
-    public SquareMatrix(int size) {
+    public SquareMatrix(int size) throws MatrixExceptions {
         super(size, size);
     }
 
@@ -13,11 +13,11 @@ public class SquareMatrix extends Matrix {
         }
     }
 
-    public SquareMatrix add(SquareMatrix A) {
+    public SquareMatrix add(SquareMatrix A) throws MatrixExceptions {
         return (SquareMatrix) super.add(A);
     }
 
-    public SquareMatrix subtract(SquareMatrix A) {
+    public SquareMatrix subtract(SquareMatrix A) throws MatrixExceptions {
         return (SquareMatrix) super.subtract(A);
     }
 

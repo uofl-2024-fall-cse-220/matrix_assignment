@@ -95,7 +95,7 @@ public class Matrix implements MatrixInterface {
         return result;
     }
 
-    public Matrix transpose()  {
+    public Matrix transpose() throws MatrixExceptions {
         Matrix result = new Matrix(numCols, numRows);
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
@@ -114,7 +114,7 @@ public class Matrix implements MatrixInterface {
         return subtract(this, A);
     }
 
-    public Matrix multiply(Matrix A) {
+    public Matrix multiply(Matrix A) throws MatrixExceptions {
        Matrix result = new Matrix(this.numRows, A.numCols);
         for (int i = 0; i < this.numRows; i++) {
             for (int j = 0; j < A.numCols; j++) {
