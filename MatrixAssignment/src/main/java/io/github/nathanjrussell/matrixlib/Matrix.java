@@ -1,9 +1,11 @@
 package io.github.nathanjrussell.matrixlib;
 
 public class Matrix implements MatrixInterface {
-    protected int numRows;
-    protected int numCols;
-    protected int[][] data;
+    //private may not be the best option here.
+    // We only need to prevent external classes from modifying the variables directly
+    private int numRows;
+    private int numCols;
+    private int[][] data;
 
     // Constructors
     public Matrix(int numRows, int numCols)  {
@@ -62,31 +64,7 @@ public class Matrix implements MatrixInterface {
         data[j][j] = value;
     }
     // Static Methods for Operations
-    public static Matrix add(Matrix A, Matrix B)  {
-        if (A.numRows != B.numRows || A.numCols != B.numCols) {
-            throw new MatrixExceptions(MatrixValidationErrorEnum.INCOMPATIBLE_MATRIX_DIMENSIONS_ADD_SUBTRACT);
-        }
-        Matrix result = new Matrix(A.numRows, A.numCols);
-        for (int i = 0; i < A.numRows; i++) {
-            for (int j = 0; j < A.numCols; j++) {
-                result.data[i][j] = A.data[i][j] + B.data[i][j];
-            }
-        }
-        return result;
-    }
 
-    public static Matrix subtract(Matrix A, Matrix B)  {
-        if (A.numRows != B.numRows || A.numCols != B.numCols) {
-            throw new MatrixExceptions(MatrixValidationErrorEnum.INCOMPATIBLE_MATRIX_DIMENSIONS_ADD_SUBTRACT);
-        }
-        Matrix result = new Matrix(A.numRows, A.numCols);
-        for (int i = 0; i < A.numRows; i++) {
-            for (int j = 0; j < A.numCols; j++) {
-                result.data[i][j] = A.data[i][j] - B.data[i][j];
-            }
-        }
-        return result;
-    }
 
     public Matrix minor(int row, int col)  {
         return new Matrix(MatrixInterface.minor(this, row, col).data);

@@ -22,6 +22,32 @@ public interface MatrixInterface {
         return result;
     }
 
+    public static Matrix add(Matrix A, Matrix B) throws MatrixExceptions {
+        if (A.numRows != B.numRows || A.numCols != B.numCols) {
+            throw new MatrixExceptions(MatrixValidationErrorEnum.INCOMPATIBLE_MATRIX_DIMENSIONS_ADD_SUBTRACT);
+        }
+        Matrix result = new Matrix(A.numRows, A.numCols);
+        for (int i = 0; i < A.numRows; i++) {
+            for (int j = 0; j < A.numCols; j++) {
+                result.data[i][j] = A.data[i][j] + B.data[i][j];
+            }
+        }
+        return result;
+    }
+
+    public static Matrix subtract(Matrix A, Matrix B) throws MatrixExceptions {
+        if (A.numRows != B.numRows || A.numCols != B.numCols) {
+            throw new MatrixExceptions(MatrixValidationErrorEnum.INCOMPATIBLE_MATRIX_DIMENSIONS_ADD_SUBTRACT);
+        }
+        Matrix result = new Matrix(A.numRows, A.numCols);
+        for (int i = 0; i < A.numRows; i++) {
+            for (int j = 0; j < A.numCols; j++) {
+                result.data[i][j] = A.data[i][j] - B.data[i][j];
+            }
+        }
+        return result;
+    }
+
     //Multiplication is common to all matrices so it is implemented here
     public static Matrix multiply(Matrix A, int scalar)  {
         Matrix result = new Matrix(A.numRows, A.numCols);
