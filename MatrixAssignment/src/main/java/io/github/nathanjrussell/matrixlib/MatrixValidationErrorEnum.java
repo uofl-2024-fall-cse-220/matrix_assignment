@@ -1,4 +1,4 @@
-package io.github.nathanjrussell;
+package io.github.nathanjrussell.matrixlib;
 
 public enum MatrixValidationErrorEnum {
     INVALID_NUM_ROWS(700, "Invalid number of rows. Number of rows must be an integer greater than zero."),

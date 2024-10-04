@@ -1,4 +1,4 @@
-package io.github.nathanjrussell;
+package io.github.nathanjrussell.matrixlib;
 
 public interface SquareMatrixInterface extends MatrixInterface {
     int getSize(); //This method will return the size of the square matrix
