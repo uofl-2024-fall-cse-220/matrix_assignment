@@ -190,4 +190,132 @@ public class SquareTest {
         assertEquals(150, result.getEntry(2, 2));
     }
 
+    @Test
+    public void testSquareMatrixPowerWithInvalidPower() throws MatrixExceptions {
+        int[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        SquareMatrix matrix = new SquareMatrix(data);
+        MatrixExceptions exception = assertThrows(MatrixExceptions.class, () -> matrix.power(-2));
+        assertEquals(MatrixValidationErrorEnum.INVALID_POWER.toString(), exception.getMessage());
+    }
+
+    @Test
+    public void testSquareMatrixDeterminant() throws MatrixExceptions {
+        int[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        SquareMatrix matrix = new SquareMatrix(data);
+        int result = matrix.determinant();
+        assertEquals(0, result);
+    }
+
+    @Test
+    public void testSquareMatrixMinor() throws MatrixExceptions {
+        int[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        SquareMatrix matrix = new SquareMatrix(data);
+        SquareMatrix result = matrix.minor(1, 1);
+        assertEquals(1, result.getEntry(0, 0));
+        assertEquals(3, result.getEntry(0, 1));
+        assertEquals(7, result.getEntry(1, 0));
+        assertEquals(9, result.getEntry(1, 1));
+    }
+
+    @Test
+    public void testSquareMatrixMinorWithInvalidRow() throws MatrixExceptions {
+        int[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        SquareMatrix matrix = new SquareMatrix(data);
+        MatrixExceptions exception = assertThrows(MatrixExceptions.class, () -> matrix.minor(3, 1));
+        assertEquals(MatrixValidationErrorEnum.INVALID_ROW.toString(), exception.getMessage());
+    }
+
+    @Test
+    public void testSquareMatrixMinorWithInvalidCol() throws MatrixExceptions {
+        int[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        SquareMatrix matrix = new SquareMatrix(data);
+        MatrixExceptions exception = assertThrows(MatrixExceptions.class, () -> matrix.minor(1, 3));
+        assertEquals(MatrixValidationErrorEnum.INVALID_COL.toString(), exception.getMessage());
+    }
+
+    @Test
+    public void testSquareMatrixGetSize() throws MatrixExceptions {
+        SquareMatrix matrix = new SquareMatrix(30);
+        assertEquals(30, matrix.getSize());
+    }
+
+    @Test
+    public void testSquareMatrixIdentity() throws MatrixExceptions {
+        ;
+        SquareMatrix matrix = SquareMatrix.identity(97);
+        for (int i = 0; i < 97; i++) {
+            for (int j = 0; j < 97; j++) {
+                if (i == j) {
+                    assertEquals(1, matrix.getEntry(i, j));
+                } else {
+                    assertEquals(0, matrix.getEntry(i, j));
+                }
+            }
+        }
+    }
+
+    @Test
+    public void testSquareMatrixIdentityWithInvalidSize() {
+        MatrixExceptions exception = assertThrows(MatrixExceptions.class, () -> SquareMatrix.identity(0));
+        assertEquals(MatrixValidationErrorEnum.INVALID_SQUARE_MATRIX_SIZE.toString(), exception.getMessage());
+    }
+
+    @Test
+    public void testSquareMatrixIdentityWithInvalidSize2() {
+        MatrixExceptions exception = assertThrows(MatrixExceptions.class, () -> SquareMatrix.identity(-4));
+        assertEquals(MatrixValidationErrorEnum.INVALID_SQUARE_MATRIX_SIZE.toString(), exception.getMessage());
+    }
+
+    @Test
+    public void testSquareMatrixDeterminantWithInvalidSize() throws MatrixExceptions {
+        int[][] data = {{17}};
+        SquareMatrix matrix = new SquareMatrix(data);
+        assertEquals(17, matrix.determinant());
+    }
+
+    @Test
+    public void testSquareMatrixDeterminantWithInvalidSize2() throws MatrixExceptions {
+        int[][] data = {{17, 19}, {23, 29}};
+        SquareMatrix matrix = new SquareMatrix(data);
+        assertEquals(17 * 29 - 19 * 23, matrix.determinant());
+    }
+
+    @Test
+    public void testSquareMatrixDeterminantWithInvalidSize3() throws MatrixExceptions {
+        int[][] data = {
+                {-3, -2, -8,  5, -2},
+                { 8, -2,  1,  5, -1},
+                { 8, -7,  4,  5,  6},
+                {-7, -1,  8,  6, -2},
+                {-10, -5, -1, -6,  0}
+        };
+        SquareMatrix matrix = new SquareMatrix(data);
+        assertEquals(-64380, matrix.determinant());
+    }
+
+    @Test
+    public void chainOperations() throws MatrixExceptions {
+        int counter = 0;
+        SquareMatrix matrix1 = new SquareMatrix(5);
+        SquareMatrix matrix2 = new SquareMatrix(5);
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                ++counter;
+                matrix1.setEntry(i, j, counter);
+                matrix2.setEntry(i, j, 25-counter);
+            }
+        }
+        SquareMatrix result = matrix1.add(matrix2).multiply(5).power(3).subtract(matrix1).add(matrix2).transpose().transpose();
+        assertEquals(48828148, result.getEntry(0, 0));
+        assertEquals(48828146, result.getEntry(0, 1));
+        assertEquals(48828144, result.getEntry(0, 2));
+        assertEquals(48828138, result.getEntry(1, 0));
+        assertEquals(48828136, result.getEntry(1, 1));
+        assertEquals(48828134, result.getEntry(1, 2));
+        assertEquals(48828128, result.getEntry(2, 0));
+        assertEquals(48828126, result.getEntry(2, 1));
+        assertEquals(48828124, result.getEntry(2, 2));
+    }
+
+
 }

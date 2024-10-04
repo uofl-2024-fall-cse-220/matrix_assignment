@@ -88,6 +88,16 @@ public class Matrix implements MatrixInterface {
         return result;
     }
 
+    public static Matrix multiply(Matrix A, int scalar) throws MatrixExceptions {
+        Matrix result = new Matrix(A.numRows, A.numCols);
+        for (int i = 0; i < A.numRows; i++) {
+            for (int j = 0; j < A.numCols; j++) {
+                result.data[i][j] = A.data[i][j] * scalar;
+            }
+        }
+        return result;
+    }
+
     public static Matrix multiply(Matrix A, Matrix B) throws MatrixExceptions {
         if (A.numCols != B.numRows ) {
             throw new MatrixExceptions(MatrixValidationErrorEnum.INCOMPATIBLE_MATRIX_DIMENSIONS_MULTIPLY);
@@ -126,11 +136,13 @@ public class Matrix implements MatrixInterface {
        return multiply(this, A);
     }
 
-
+    public Matrix multiply(int scalar) throws MatrixExceptions {
+        return multiply(this, scalar);
+    }
 
     // Helper method for creating an identity matrix
     public static Matrix identity(int size) throws MatrixExceptions {
-        return new IdentityMatrix(size);
+        return SquareMatrix.identity(size);
     }
 
 

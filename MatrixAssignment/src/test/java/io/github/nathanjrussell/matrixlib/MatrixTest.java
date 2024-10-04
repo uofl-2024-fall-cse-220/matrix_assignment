@@ -200,4 +200,17 @@ public class MatrixTest {
         assertEquals(MatrixValidationErrorEnum.INCOMPATIBLE_MATRIX_DIMENSIONS_MULTIPLY.toString(), exception.getMessage());
     }
 
+    @Test
+    public void testMatrixMultiplyByScalar() throws MatrixExceptions {
+        int[][] data = {{1, 2, 3}, {4, 5, 6}};
+        Matrix matrix = new Matrix(data);
+        Matrix result = matrix.multiply(3);
+        assertEquals(3, result.getEntry(0, 0));
+        assertEquals(6, result.getEntry(0, 1));
+        assertEquals(9, result.getEntry(0, 2));
+        assertEquals(12, result.getEntry(1, 0));
+        assertEquals(15, result.getEntry(1, 1));
+        assertEquals(18, result.getEntry(1, 2));
+    }
+
 }
