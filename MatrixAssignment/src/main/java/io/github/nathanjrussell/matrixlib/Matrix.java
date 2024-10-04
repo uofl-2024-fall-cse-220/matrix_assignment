@@ -6,7 +6,7 @@ public class Matrix implements MatrixInterface {
     protected int[][] data;
 
     // Constructors
-    public Matrix(int numRows, int numCols) throws MatrixExceptions {
+    public Matrix(int numRows, int numCols)  {
         this.numRows = numRows;
         this.numCols = numCols;
         if (numRows == numCols && numRows <= 0) {
@@ -21,7 +21,7 @@ public class Matrix implements MatrixInterface {
         this.data = new int[numRows][numCols];
     }
 
-    public Matrix(int[][] data) throws MatrixExceptions {
+    public Matrix(int[][] data)  {
         this.numRows = data.length;
         this.numCols = data[0].length;
         for (int i = 1; i < numRows; i++) {
@@ -32,7 +32,7 @@ public class Matrix implements MatrixInterface {
         this.data = data;
     }
 
-    public int getEntry(int i, int j) throws MatrixExceptions {
+    public int getEntry(int i, int j)  {
         if (i < 0 || i >= numRows) {
             throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_ROW);
         }
@@ -52,7 +52,7 @@ public class Matrix implements MatrixInterface {
         return numCols;
     }
 
-    public void setEntry(int i, int j, int value) throws MatrixExceptions {
+    public void setEntry(int i, int j, int value)  {
         if (i < 0 || i >= numRows) {
             throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_ROW);
         }
@@ -62,7 +62,7 @@ public class Matrix implements MatrixInterface {
         data[i][j] = value;
     }
     // Static Methods for Operations
-    public static Matrix add(Matrix A, Matrix B) throws MatrixExceptions {
+    public static Matrix add(Matrix A, Matrix B)  {
         if (A.numRows != B.numRows || A.numCols != B.numCols) {
             throw new MatrixExceptions(MatrixValidationErrorEnum.INCOMPATIBLE_MATRIX_DIMENSIONS_ADD_SUBTRACT);
         }
@@ -75,7 +75,7 @@ public class Matrix implements MatrixInterface {
         return result;
     }
 
-    public static Matrix subtract(Matrix A, Matrix B) throws MatrixExceptions {
+    public static Matrix subtract(Matrix A, Matrix B)  {
         if (A.numRows != B.numRows || A.numCols != B.numCols) {
             throw new MatrixExceptions(MatrixValidationErrorEnum.INCOMPATIBLE_MATRIX_DIMENSIONS_ADD_SUBTRACT);
         }
@@ -88,7 +88,7 @@ public class Matrix implements MatrixInterface {
         return result;
     }
 
-    public static Matrix multiply(Matrix A, int scalar) throws MatrixExceptions {
+    public static Matrix multiply(Matrix A, int scalar)  {
         Matrix result = new Matrix(A.numRows, A.numCols);
         for (int i = 0; i < A.numRows; i++) {
             for (int j = 0; j < A.numCols; j++) {
@@ -98,7 +98,7 @@ public class Matrix implements MatrixInterface {
         return result;
     }
 
-    public static Matrix multiply(Matrix A, Matrix B) throws MatrixExceptions {
+    public static Matrix multiply(Matrix A, Matrix B)  {
         if (A.numCols != B.numRows ) {
             throw new MatrixExceptions(MatrixValidationErrorEnum.INCOMPATIBLE_MATRIX_DIMENSIONS_MULTIPLY);
         }
@@ -113,7 +113,7 @@ public class Matrix implements MatrixInterface {
         return result;
     }
 
-    public Matrix transpose() throws MatrixExceptions {
+    public Matrix transpose()  {
         Matrix result = new Matrix(numCols, numRows);
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
@@ -124,19 +124,19 @@ public class Matrix implements MatrixInterface {
     }
 
     // Instance Methods that utilize Static Methods
-    public Matrix add(Matrix A) throws MatrixExceptions {
+    public Matrix add(Matrix A)  {
         return add(this, A);
     }
 
-    public Matrix subtract(Matrix A) throws MatrixExceptions {
+    public Matrix subtract(Matrix A)  {
         return subtract(this, A);
     }
 
-    public Matrix multiply(Matrix A) throws MatrixExceptions {
+    public Matrix multiply(Matrix A)  {
        return multiply(this, A);
     }
 
-    public Matrix multiply(int scalar) throws MatrixExceptions {
+    public Matrix multiply(int scalar)  {
         return multiply(this, scalar);
     }
 

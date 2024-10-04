@@ -2,43 +2,39 @@ package io.github.nathanjrussell.matrixlib;
 
 public class SquareMatrix extends Matrix {
 
-    public SquareMatrix(int size) throws MatrixExceptions {
+    public SquareMatrix(int size)  {
         super(size, size);
     }
 
-    public SquareMatrix(int[][] data) throws MatrixExceptions {
+    public SquareMatrix(int[][] data)  {
         super(data);
         if (numRows != numCols) {
             throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_SQUARE_MATRIX_SIZE);
         }
     }
 
-    public SquareMatrix add(SquareMatrix A) throws MatrixExceptions {
-        Matrix result = super.add(A);
-        return new SquareMatrix(result.data);
+    public SquareMatrix add(SquareMatrix A)  {
+        return add(this, A);
     }
 
-    public SquareMatrix subtract(SquareMatrix A) throws MatrixExceptions {
-        Matrix result = super.subtract(A);
-        return new SquareMatrix(result.data);
+    public SquareMatrix subtract(SquareMatrix A)  {
+        return subtract(this, A);
     }
 
-    public SquareMatrix multiply(SquareMatrix A) throws MatrixExceptions {
-        Matrix result = super.multiply(A);
-        return new SquareMatrix(result.data);
+    public SquareMatrix multiply(SquareMatrix A)  {
+        return multiply(this, A);
     }
 
-    public SquareMatrix multiply(int scalar) throws MatrixExceptions {
-        Matrix result = super.multiply(scalar);
-        return new SquareMatrix(result.data);
+    public SquareMatrix multiply(int scalar)  {
     }
 
-    public SquareMatrix transpose() throws MatrixExceptions {
+    public SquareMatrix transpose()  {
         Matrix result = super.transpose();
         return new SquareMatrix(result.data);
     }
 
-    public int determinant() throws MatrixExceptions {
+    //The body of this method is fine
+    public int determinant()  {
         if (numRows == 1) {
             return data[0][0];
         }
@@ -53,8 +49,8 @@ public class SquareMatrix extends Matrix {
         }
         return det;
     }
-
-    public SquareMatrix minor(int row, int col) throws MatrixExceptions {
+    //The body of this method is fine
+    public SquareMatrix minor(int row, int col)  {
         if (row < 0 || row >= numRows) {
             throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_ROW);
         }
@@ -84,7 +80,8 @@ public class SquareMatrix extends Matrix {
         return numRows;
     }
 
-    public SquareMatrix power(int n) throws MatrixExceptions {
+    //The body of this method is fine
+    public SquareMatrix power(int n)  {
         if (n < 0) {
             throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_POWER);
         }
