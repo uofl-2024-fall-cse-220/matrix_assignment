@@ -140,10 +140,7 @@ public class Matrix implements MatrixInterface {
         return multiply(this, scalar);
     }
 
-    // Helper method for creating an identity matrix
-    public static Matrix identity(int size) throws MatrixExceptions {
-        return SquareMatrix.identity(size);
-    }
+
 
 
 }
