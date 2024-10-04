@@ -37,15 +37,18 @@ jobs:
       # Install Maven dependencies
       - name: Install Maven dependencies
         run: mvn install -DskipTests
+        working-directory: MatrixAssignment
 
       # Run Maven tests
       - name: Run Maven tests
         run: mvn test
+        working-directory: MatrixAssignment
 
-      # Optionally, upload test results
-      - name: Archive test results
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-results
-          path: target/surefire-reports/
+
+      # # Optionally, upload test results
+      # - name: Archive test results
+      #   if: always()
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: test-results
+      #     path: target/surefire-reports/
