@@ -2,6 +2,10 @@
 
 The goal of this assignment is to help students understand exceptions, enums, interfaces, and class inheritance. The starter code provided represents minimal code and likely contains poor Java coding practices. As the semester progresses, you will learn about additional Java keywords and implementations that will make the project more portable and reliable.
 
+### IntelliJ Directions
+
+IntelliJ is the recommended IDE for Java development.  After you clone this repo to your local computer, the directory MatrixAssignment is the directory you should select when opening the project in IntelliJ.
+
 ## Project Owner Statement
 
 As a Java instructor, I need to evaluate your ability to debug errors and implement the following: 
