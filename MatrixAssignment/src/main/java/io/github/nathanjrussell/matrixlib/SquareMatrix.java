@@ -6,10 +6,10 @@ public class SquareMatrix extends Matrix {
         super(size, size);
     }
 
-    public SquareMatrix(int[][] data) {
+    public SquareMatrix(int[][] data) throws MatrixExceptions {
         super(data);
-        if (rows != numCols) {
-            throw new IllegalArgumentException("Data must form a square matrix.");
+        if (numRows != numCols) {
+            throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_SQUARE_MATRIX_SIZE);
         }
     }
 
@@ -25,9 +25,9 @@ public class SquareMatrix extends Matrix {
         return numRows;
     }
 
-    public SquareMatrix power(int n) {
+    public SquareMatrix power(int n) throws MatrixExceptions {
         if (n < 0) {
-            throw new IllegalArgumentException("Power must be a non-negative integer.");
+            throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_POWER);
         }
         if (n == 0) {
             return new IdentityMatrix(numRows);

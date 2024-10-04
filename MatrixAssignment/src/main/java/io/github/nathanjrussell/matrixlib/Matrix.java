@@ -1,16 +1,20 @@
 package io.github.nathanjrussell.matrixlib;
 
-import java.util.Arrays;
-
 public class Matrix implements MatrixInterface {
     protected int numRows;
     protected int numCols;
     protected int[][] data;
 
     // Constructors
-    public Matrix(int numRows, int numCols) {
+    public Matrix(int numRows, int numCols) throws MatrixExceptions {
         this.numRows = numRows;
         this.numCols = numCols;
+        if (numRows <= 0) {
+            throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_NUM_ROWS);
+        }
+        if (numCols <= 0) {
+            throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_NUM_COLS);
+        }
         this.data = new int[numRows][numCols];
     }
 
@@ -20,7 +24,13 @@ public class Matrix implements MatrixInterface {
         this.data = data;
     }
 
-    public int getEntry(int i, int j) {
+    public int getEntry(int i, int j) throws MatrixExceptions {
+        if (i < 0 || i >= numRows) {
+            throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_ROW);
+        }
+        if (j < 0 || j >= numCols) {
+            throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_COL);
+        }
         return data[i][j];
     }
 
@@ -34,13 +44,19 @@ public class Matrix implements MatrixInterface {
         return numCols;
     }
 
-    public void setEntry(int i, int j, int value) {
+    public void setEntry(int i, int j, int value) throws MatrixExceptions {
+        if (i < 0 || i >= numRows) {
+            throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_ROW);
+        }
+        if (j < 0 || j >= numCols) {
+            throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_COL);
+        }
         data[i][j] = value;
     }
     // Static Methods for Operations
-    public static Matrix add(Matrix A, Matrix B) {
+    public static Matrix add(Matrix A, Matrix B) throws MatrixExceptions {
         if (A.numRows != B.numRows || A.numCols != B.numCols) {
-            throw new IllegalArgumentException("Matrices must have the same dimensions.");
+            throw new MatrixExceptions(MatrixValidationErrorEnum.INCOMPATIBLE_MATRIX_DIMENSIONS_ADD_SUBTRACT);
         }
         Matrix result = new Matrix(A.numRows, A.numCols);
         for (int i = 0; i < A.numRows; i++) {
@@ -51,9 +67,9 @@ public class Matrix implements MatrixInterface {
         return result;
     }
 
-    public static Matrix subtract(Matrix A, Matrix B) {
+    public static Matrix subtract(Matrix A, Matrix B) throws MatrixExceptions {
         if (A.numRows != B.numRows || A.numCols != B.numCols) {
-            throw new IllegalArgumentException("Matrices must have the same dimensions.");
+            throw new MatrixExceptions(MatrixValidationErrorEnum.INCOMPATIBLE_MATRIX_DIMENSIONS_ADD_SUBTRACT);
         }
         Matrix result = new Matrix(A.numRows, A.numCols);
         for (int i = 0; i < A.numRows; i++) {
@@ -64,9 +80,9 @@ public class Matrix implements MatrixInterface {
         return result;
     }
 
-    public static Matrix multiply(Matrix A, Matrix B) {
-        if (A.numCols != B.numRows) {
-            throw new IllegalArgumentException("Matrices dimensions do not match for multiplication.");
+    public static Matrix multiply(Matrix A, Matrix B) throws MatrixExceptions {
+        if (A.numRows != B.numRows || A.numCols != B.numCols) {
+            throw new MatrixExceptions(MatrixValidationErrorEnum.INCOMPATIBLE_MATRIX_DIMENSIONS_MULTIPLY);
         }
         Matrix result = new Matrix(A.numRows, B.numCols);
         for (int i = 0; i < A.numRows; i++) {
@@ -79,7 +95,7 @@ public class Matrix implements MatrixInterface {
         return result;
     }
 
-    public Matrix transpose() {
+    public Matrix transpose()  {
         Matrix result = new Matrix(numCols, numRows);
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
@@ -90,11 +106,11 @@ public class Matrix implements MatrixInterface {
     }
 
     // Instance Methods that utilize Static Methods
-    public Matrix add(Matrix A) {
+    public Matrix add(Matrix A) throws MatrixExceptions {
         return add(this, A);
     }
 
-    public Matrix subtract(Matrix A) {
+    public Matrix subtract(Matrix A) throws MatrixExceptions {
         return subtract(this, A);
     }
 
@@ -117,8 +133,5 @@ public class Matrix implements MatrixInterface {
         return new IdentityMatrix(size);
     }
 
-    @Override
-    public String toString() {
-        return Arrays.deepToString(data);
-    }
+
 }
