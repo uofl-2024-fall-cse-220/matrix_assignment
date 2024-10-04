@@ -7,4 +7,8 @@ public interface MatrixInterface {
     int getNumRows(); //This method will return the number of rows  in the matrix
     int getNumCols(); //This method will return the number of columns in the matrix
 
+    Matrix add(Matrix other) throws MatrixExceptions; //This method will add two matrices
+    Matrix subtract(Matrix other) throws MatrixExceptions; //This method will subtract two matrices
+    Matrix multiply(Matrix other) throws MatrixExceptions; //This method will multiply two matrices
+    Matrix transpose(); //This method will return the transpose of the matrix
 }

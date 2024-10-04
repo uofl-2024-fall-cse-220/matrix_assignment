@@ -8,7 +8,7 @@ public class SquareMatrix extends Matrix {
 
     public SquareMatrix(int[][] data) {
         super(data);
-        if (rows != cols) {
+        if (rows != numCols) {
             throw new IllegalArgumentException("Data must form a square matrix.");
         }
     }
@@ -21,14 +21,16 @@ public class SquareMatrix extends Matrix {
         return (SquareMatrix) super.subtract(A);
     }
 
-
+    public int getSize() {
+        return numRows;
+    }
 
     public SquareMatrix power(int n) {
         if (n < 0) {
             throw new IllegalArgumentException("Power must be a non-negative integer.");
         }
         if (n == 0) {
-            return new IdentityMatrix(rows);
+            return new IdentityMatrix(numRows);
         }
         Matrix result = this;
         for (int i = 1; i < n; i++) {
