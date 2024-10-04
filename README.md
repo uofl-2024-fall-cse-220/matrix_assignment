@@ -4,7 +4,7 @@ The goal of this assignment is to help students understand exceptions, enums, in
 
 ## Project Owner Statement
 
-As a Java instructor, I need to evaluate your ability to debug errors and implement the following:
+As a Java instructor, I need to evaluate your ability to debug errors and implement the following: 
 
 * Interfaces
 * Class inheritance
