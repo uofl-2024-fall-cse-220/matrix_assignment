@@ -9,6 +9,9 @@ public class Matrix implements MatrixInterface {
     public Matrix(int numRows, int numCols) throws MatrixExceptions {
         this.numRows = numRows;
         this.numCols = numCols;
+        if (numRows == numCols && numRows <= 0) {
+            throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_SQUARE_MATRIX_SIZE);
+        }
         if (numRows <= 0) {
             throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_NUM_ROWS);
         }
@@ -23,7 +26,7 @@ public class Matrix implements MatrixInterface {
         this.numCols = data[0].length;
         for (int i = 1; i < numRows; i++) {
             if (data[i].length != numCols) {
-                throw new MatrixExceptions(MatrixValidationErrorEnum.INVALID_NUM_COLS);
+                throw new MatrixExceptions(MatrixValidationErrorEnum.NOT_ALL_ROWS_SAME_LENGTH);
             }
         }
         this.data = data;

@@ -39,7 +39,7 @@ public class MatrixTest {
     public void testMatrixConstructorWithInvalidData() {
         int[][] data = {{1, 2, 3}, {4, 5, 6}, {7, 8}};
         MatrixExceptions exception = assertThrows(MatrixExceptions.class, () -> new Matrix(data));
-        assertEquals(MatrixValidationErrorEnum.INVALID_NUM_COLS.toString(), exception.getMessage());
+        assertEquals(MatrixValidationErrorEnum.NOT_ALL_ROWS_SAME_LENGTH.toString(), exception.getMessage());
     }
 
     @Test

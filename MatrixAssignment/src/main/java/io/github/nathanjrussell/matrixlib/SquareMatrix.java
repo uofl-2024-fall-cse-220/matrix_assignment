@@ -14,11 +14,13 @@ public class SquareMatrix extends Matrix {
     }
 
     public SquareMatrix add(SquareMatrix A) throws MatrixExceptions {
-        return (SquareMatrix) super.add(A);
+        Matrix result = super.add(A);
+        return new SquareMatrix(result.data);
     }
 
     public SquareMatrix subtract(SquareMatrix A) throws MatrixExceptions {
-        return (SquareMatrix) super.subtract(A);
+        Matrix result = super.subtract(A);
+        return new SquareMatrix(result.data);
     }
 
     public int getSize() {
