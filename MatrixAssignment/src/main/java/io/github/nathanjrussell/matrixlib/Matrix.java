@@ -86,7 +86,7 @@ public class Matrix implements MatrixInterface {
     }
 
     public static Matrix multiply(Matrix A, Matrix B) throws MatrixExceptions {
-        if (A.numRows != B.numRows || A.numCols != B.numCols) {
+        if (A.numCols != B.numRows ) {
             throw new MatrixExceptions(MatrixValidationErrorEnum.INCOMPATIBLE_MATRIX_DIMENSIONS_MULTIPLY);
         }
         Matrix result = new Matrix(A.numRows, B.numCols);
@@ -120,15 +120,7 @@ public class Matrix implements MatrixInterface {
     }
 
     public Matrix multiply(Matrix A) throws MatrixExceptions {
-       Matrix result = new Matrix(this.numRows, A.numCols);
-        for (int i = 0; i < this.numRows; i++) {
-            for (int j = 0; j < A.numCols; j++) {
-                for (int k = 0; k < this.numCols; k++) {
-                    result.data[i][j] += this.data[i][k] * A.data[k][j];
-                }
-            }
-        }
-        return result;
+       return multiply(this, A);
     }
 
 
