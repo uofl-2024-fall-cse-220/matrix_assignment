@@ -129,7 +129,7 @@ public class Matrix implements MatrixInterface {
 
 
     // Helper method for creating an identity matrix
-    public static Matrix identity(int size) {
+    public static Matrix identity(int size) throws MatrixExceptions {
         return new IdentityMatrix(size);
     }
 

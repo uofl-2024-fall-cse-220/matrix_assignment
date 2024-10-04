@@ -2,7 +2,7 @@ package io.github.nathanjrussell.matrixlib;
 
 public class IdentityMatrix extends SquareMatrix {
 
-    public IdentityMatrix(int size) {
+    public IdentityMatrix(int size) throws MatrixExceptions {
         super(size);
         for (int i = 0; i < size; i++) {
             data[i][i] = 1;
